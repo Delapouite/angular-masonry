@@ -82,17 +82,18 @@
           self.scheduleMasonryOnce('layout');
         }
 
-        if (!self.loadImages){
+        function _appendLayout() {
           _append();
           _layout();
+        }
+
+        if (!self.loadImages){
+          _appendLayout();
         } else if (self.preserveOrder) {
           _append();
           imagesLoaded(element, _layout);
         } else {
-          imagesLoaded(element, function imagesLoaded() {
-            _append();
-            _layout();
-          });
+          imagesLoaded(element, _appendLayout);
         }
       };
 
@@ -120,15 +121,16 @@
         masonry.layout();
         $scope.$emit('masonry.reloaded');
       };
+    })
 
-
-    }).directive('masonry', function masonryDirective() {
+    .directive('masonry', function masonryDirective() {
       return {
         restrict: 'AE',
         controller: 'MasonryCtrl',
         scope: true,
         link: {
           pre: function preLink(scope, element, attrs, ctrl) {
+            // read options and set defaults
             var attrOptions = scope.$eval(attrs.masonry || attrs.masonryOptions);
             var options = angular.extend({
               itemSelector: attrs.itemSelector || '.masonry-brick',
@@ -159,7 +161,9 @@
           }
         }
       };
-    }).directive('masonryBrick', function masonryBrickDirective() {
+    })
+
+    .directive('masonryBrick', function masonryBrickDirective() {
       return {
         restrict: 'AC',
         require: '^masonry',
