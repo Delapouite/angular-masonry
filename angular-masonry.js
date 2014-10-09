@@ -30,7 +30,7 @@
             return item[0] === args[0];
           }).length > 0;
         if (!found) {
-          this.scheduleMasonry.apply(null, arguments);
+          this.scheduleMasonry.apply(this, arguments);
         }
       };
       // Make sure it's only executed once within a reasonable time-frame in

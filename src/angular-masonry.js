@@ -32,7 +32,7 @@
         }).length > 0;
 
         if (!found) {
-          this.scheduleMasonry.apply(null, arguments);
+          this.scheduleMasonry.apply(this, arguments);
         }
       };
 
