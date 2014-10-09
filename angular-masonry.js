@@ -50,7 +50,7 @@
       function defaultLoaded($element) {
         $element.addClass('loaded');
       }
-      this.appendBrick = function appendBrick(element, id) {
+      this.appendBrick = function appendBrick(id, element) {
         if (destroyed) {
           return;
         }
@@ -146,7 +146,7 @@
       link: {
         pre: function preLink(scope, element, attrs, ctrl) {
           var id = scope.$id, index;
-          ctrl.appendBrick(element, id);
+          ctrl.appendBrick(id, element);
           element.on('$destroy', function () {
             ctrl.removeBrick(id, element);
           });
