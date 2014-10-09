@@ -18,6 +18,8 @@
   "jquery": true,
   "globals": {
     "angular": false,
-    "sinon": false
+    "sinon": false,
+    "Masonry": false,
+    "imagesLoaded": false
   }
 }
