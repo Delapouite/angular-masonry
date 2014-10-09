@@ -12,9 +12,12 @@
       var schedule = [];
       var destroyed = false;
       var self = this;
-      var timeout = null;
       var masonry = null;
+      // id
+      var timeout = null;
 
+      // in ms
+      this.scheduleTimeout = 30;
       this.preserveOrder = false;
       this.loadImages = true;
 
@@ -50,7 +53,7 @@
             masonry[args]();
           });
           schedule = [];
-        }, 30);
+        }, this.scheduleTimeout);
       };
 
       function defaultLoaded($element) {
@@ -138,6 +141,8 @@
             }, attrOptions || {});
 
             scope.masonry = new Masonry(element[0], options);
+
+            ctrl.scheduleTimeout = parseInt(attrs.scheduleTimeout, 10) && ctrl.scheduleTimeout;
 
             var loadImages = scope.$eval(attrs.loadImages);
             ctrl.loadImages = loadImages !== false;
