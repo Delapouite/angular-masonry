@@ -27,9 +27,9 @@
 
       this.scheduleMasonryOnce = function scheduleMasonryOnce() {
         var args = arguments;
-        var found = schedule.filter(function filterFn(item) {
+        var found = schedule.some(function someFn(item) {
           return item[0] === args[0];
-        }).length > 0;
+        });
 
         if (!found) {
           this.scheduleMasonry.apply(this, arguments);
