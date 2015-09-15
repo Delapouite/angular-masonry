@@ -117,7 +117,7 @@
         masonry.destroy();
         $scope.$emit('masonry.destroyed');
 
-        bricks = [];
+        bricks = {};
       };
 
       this.reload = function reload() {
@@ -156,6 +156,14 @@
                 return element.prop('offsetParent');
               }, function (isVisible, wasVisible) {
                 if (isVisible && !wasVisible) {
+                  ctrl.reload();
+                }
+              });
+            }
+            var reloadOnResize = scope.$eval(attrs.reloadOnResize);
+            if (reloadOnResize !== false && attrs.reloadOnResize !== undefined) {
+              scope.$watch('masonryContainer.offsetWidth', function (newWidth, oldWidth) {
+                if (newWidth !== oldWidth) {
                   ctrl.reload();
                 }
               });
